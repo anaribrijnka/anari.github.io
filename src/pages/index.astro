@@ -1,25 +1,40 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-
-<Layout title="Chat de Cerâmica com IA Local">
+<Layout title="Cerâmica — Conhecimento com IA Local">
   <div class="hero">
-    <div class="badge">🧠 190 conhecimentos indexados</div>
-
-    <h1>ANARI OS</h1>
+    <div class="badge">🏺 Cerâmica artesanal · Norte de Portugal</div>
+    <h1>Conhecimento de Cerâmica</h1>
     <p>
-      Uma inteligência artificial que corre num mini-PC em Penafiel.<br/>
-      Criada por um ceramista. Para ceramistas.
+      Conceitos técnicos, peças, processos e materiais.<br/>
+      Criado por um ceramista em Penafiel.
     </p>
-
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 0.6rem; max-width: 300px; margin: 0 auto;">
-      <a href="/auth/login" style="display: block; width: 100%; padding: 0.85rem; background: var(--text); color: var(--bg); text-align: center; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.15s;">
-        Entrar na Plataforma
-      </a>
-      <a href="/auth/register" style="display: block; width: 100%; padding: 0.75rem; background: transparent; color: var(--text-secondary); text-align: center; border-radius: 8px; text-decoration: none; font-weight: 500; font-size: 0.85rem; border: 1px solid var(--border); transition: all 0.15s;">
-        Criar Conta Gratuita
-      </a>
+    <div class="cta-group">
+      <a href="/conceitos" class="btn-primary">Explorar Conceitos</a>
+      <a href="/portfolio" class="btn-secondary">Ver Peças</a>
     </div>
+  </div>
+
+  <div class="grid">
+    <a href="/conceitos" class="card">
+      <span class="icon">📚</span>
+      <h2>Conceitos Técnicos</h2>
+      <p>Argilas, fornadas, vidrados, técnicas de construção e defeitos.</p>
+    </a>
+    <a href="/portfolio" class="card">
+      <span class="icon">🏺</span>
+      <h2>Peças</h2>
+      <p>Trabalhos realizados com documentação do processo criativo.</p>
+    </a>
+    <a href="/videos" class="card">
+      <span class="icon">🎥</span>
+      <h2>Vídeos</h2>
+      <p>Registos de processo, técnicas e resultados de fornadas.</p>
+    </a>
+  </div>
+
+  <div class="coming-soon">
+    <p>💬 Chat com IA sobre cerâmica — em breve</p>
   </div>
 </Layout>
 
@@ -50,6 +65,55 @@ import Layout from '../layouts/Layout.astro';
     max-width: 460px;
     margin: 0 auto 2.5rem;
     line-height: 1.7;
+  }
+  .cta-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    padding: 0.85rem 2rem;
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .btn-secondary {
+    padding: 0.85rem 2rem;
+    background: transparent;
+    color: var(--text-secondary);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: 1px solid var(--border);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 3rem 0;
+  }
+  .card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s;
+  }
+  .card:hover { border-color: var(--accent); }
+  .card .icon { font-size: 1.8rem; display: block; margin-bottom: 0.8rem; }
+  .card h2 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+  .coming-soon {
+    text-align: center;
+    padding: 2rem 0 4rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
   }
   @media (max-width: 640px) {
     .hero { padding: 3rem 0 2rem; }
