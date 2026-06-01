@@ -1,0 +1,162 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description || "ANARI OS — Chat de Cerâmica com Inteligência Artificial Local"} />
+    <title>{title} — ANARI OS</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+:root {
+  --cor-terra: #B87333;
+  --cor-barro: #C19A6B;
+  --cor-areia: #F8F4F0;
+  --cor-cinza: #3A3A3A;
+  --cor-claro: #FAF9F6;
+  --cor-terra-claro: #D2B48C;
+  --fonte-titulos: 'Georgia', serif;
+  --fonte-corpo: 'Segoe UI', system-ui, sans-serif;
+  --espaco-extra: 1.5rem;
+  --sombra-suave: 0 4px 12px rgba(0,0,0,0.04);
+  --borda-redonda: 8px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--fonte-corpo);
+  background: var(--cor-claro);
+  color: var(--cor-cinza);
+  line-height: 1.8;
+  min-height: 100vh;
+  padding: var(--espaco-extra) 0;
+}
+
+header {
+  background: var(--cor-cinza);
+  color: white;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: var(--borda-redonda);
+  box-shadow: var(--sombra-suave);
+}
+
+header a {
+  color: var(--cor-terra-claro);
+  text-decoration: none;
+  font-family: var(--fonte-titulos);
+  transition: color 0.3s ease;
+}
+
+header nav a {
+  margin-left: 2rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+header nav a:hover { color: var(--cor-barro); }
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 3rem;
+  box-shadow: var(--sombra-suave);
+  border-radius: var(--borda-redonda);
+}
+
+footer {
+  background: var(--cor-cinza);
+  color: var(--cor-areia);
+  text-align: center;
+  padding: 3rem 2rem;
+  font-size: 0.9rem;
+  margin-top: 5rem;
+  border-radius: var(--borda-redonda);
+  box-shadow: var(--sombra-suave);
+}
+
+footer a { color: var(--cor-barro); }
+
+h1 { 
+  font-family: var(--fonte-titulos); 
+  font-size: 3rem; 
+  margin-bottom: 1.5rem; 
+  color: var(--cor-cinza);
+  letter-spacing: 0.5px;
+}
+
+h2 { 
+  font-family: var(--fonte-titulos); 
+  font-size: 1.7rem; 
+  margin: 2.5rem 0 1.2rem; 
+  color: var(--cor-terra);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 0.5rem;
+}
+
+.subtitle { 
+  color: var(--cor-terra); 
+  font-style: italic; 
+  font-size: 1.2rem; 
+  margin-bottom: 2.5rem;
+  border-left: 3px solid var(--cor-terra-claro);
+  padding-left: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--cor-terra);
+  color: white;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.btn:hover { 
+  background: var(--cor-barro);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+a {
+  transition: color 0.3s ease;
+}
+
+a:hover { 
+  color: var(--cor-terra-claro);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+</style>
+  </head>
+  <body>
+    <header>
+      <a href="/"><strong>🏺 ANARI OS</strong></a>
+      <nav>
+        <a href="/chat">💬 Chat</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <p>ANARI OS — Criado por <a href="https://anaribrijnka.github.io">Manuel Caetano</a> em Penafiel, Portugal.</p>
+      <p>Funciona 100% local. Zero cloud. Máximo respeito pela privacidade.</p>
+    </footer>
+  </body>
+</html>

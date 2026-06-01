@@ -1,0 +1,74 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Login — ANARI OS">
+  <h1>🔐 Entrar</h1>
+  <p class="subtitle">Acede ao Chat de Cerâmica.</p>
+
+  <div class="card">
+    <form id="login-form" method="POST" onsubmit="return false;">
+      <input type="email" id="email" placeholder="Email" value="brijnka1@gmail.com" required />
+      <input type="password" id="password" placeholder="Password" value="ceramica2026" required />
+      <button type="button" id="login-btn" class="btn">Entrar</button>
+    </form>
+    <p style="margin-top: 1rem; text-align: center;">
+      <a href="/auth/register">Criar conta</a> | <a href="/">Home</a>
+    </p>
+    <div id="msg" style="text-align: center; margin-top: 1rem;"></div>
+  </div>
+</Layout>
+
+<style>
+  .card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  input {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+  .btn { width: 100%; margin-top: 0.5rem; }
+  .success { color: #2e7d32; }
+  .error { color: #c62828; }
+</style>
+
+<script>
+  document.getElementById('login-btn').onclick = async function() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const msg = document.getElementById('msg');
+    
+    msg.innerHTML = 'A tentar...';
+    
+    try {
+      const res = await fetch('http://localhost:8000/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, password: password })
+      });
+      const data = await res.json();
+      
+      if (data.status === 'ok') {
+        localStorage.setItem('anari_token', data.token);
+        localStorage.setItem('anari_user', data.name);
+        msg.innerHTML = '<span class="success">✅ Login OK! A redirecionar...</span>';
+        setTimeout(function() { window.location.href = '/chat'; }, 500);
+      } else {
+        msg.innerHTML = '<span class="error">❌ ' + data.message + '</span>';
+      }
+    } catch(e) {
+      msg.innerHTML = '<span class="error">❌ Erro: O backend está a correr? (porta 8000)</span>';
+    }
+  };
+</script>

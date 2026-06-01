@@ -1,0 +1,136 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="pt" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description || "ANARI OS — Chat de Cerâmica com Inteligência Artificial Local"} />
+    <title>{title} — ANARI OS</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #0a0a0b;
+        --bg-card: #111113;
+        --text: #ededef;
+        --text-secondary: #9d9da5;
+        --border: #1e1e22;
+        --accent: #eb9550;
+        --accent-subtle: rgba(235,149,80,0.08);
+        --font: 'Inter', system-ui, -apple-system, sans-serif;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      body {
+        font-family: var(--font);
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      header {
+        background: rgba(10,10,11,0.8);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border-bottom: 1px solid var(--border);
+        padding: 0.9rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      header .logo {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text);
+        text-decoration: none;
+        letter-spacing: -0.01em;
+      }
+      header nav { display: flex; gap: 1.2rem; align-items: center; }
+      header nav a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.8rem;
+        font-weight: 500;
+        transition: color 0.15s;
+      }
+      header nav a:hover { color: var(--text); }
+
+      main {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 2rem 2rem;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        font-family: var(--font);
+        font-size: 0.9rem;
+      }
+      input:focus { outline: none; border-color: var(--accent); }
+      input::placeholder { color: #555; }
+
+      footer {
+        text-align: center;
+        padding: 2.5rem 2rem;
+        color: var(--text-secondary);
+        font-size: 0.75rem;
+        border-top: 1px solid var(--border);
+        margin-top: 3rem;
+      }
+      footer a { color: var(--accent); text-decoration: none; }
+      footer .features {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+        font-size: 0.7rem;
+        color: #666;
+      }
+
+      @media (max-width: 640px) {
+        header { padding: 0.75rem 1rem; }
+        main { padding: 1.5rem 1rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/" class="logo">ANARI OS</a>
+      <nav>
+        <a href="/chat">Chat</a>
+        <a href="/auth/login">Entrar</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <div class="features">
+        <span>🔒 100% Privado</span>
+        <span>⚡ Respostas Instantâneas</span>
+        <span>🎓 Para Aprender</span>
+      </div>
+      <p>ANARI OS · Criado por <a href="/">Manuel Caetano</a> · Penafiel, Portugal</p>
+      <p style="margin-top: 0.2rem;">100% local. Zero cloud. Privacidade total.</p>
+    </footer>
+  </body>
+</html>

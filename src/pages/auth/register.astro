@@ -1,0 +1,78 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Registo — ANARI OS">
+  <h1>📝 Criar Conta</h1>
+  <p class="subtitle">Junta-te à comunidade de cerâmica.</p>
+
+  <div class="card">
+    <h2>Registo</h2>
+    <input type="text" id="reg-name" placeholder="Nome" />
+    <input type="email" id="reg-email" placeholder="Email" />
+    <input type="password" id="reg-password" placeholder="Password" />
+    <button onclick="doRegister()" class="btn">Criar Conta</button>
+    <p style="margin-top: 1rem; font-size: 0.9rem;">
+      Já tens conta? <a href="/auth/login">Faz login</a>
+    </p>
+    <div id="auth-message" style="margin-top: 1rem;"></div>
+  </div>
+
+  <p style="margin-top: 2rem;"><a href="/">← Voltar</a></p>
+</Layout>
+
+<style>
+  .card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  input {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+  .btn { width: 100%; margin-top: 0.5rem; }
+  .success { color: #2e7d32; }
+  .error { color: #c62828; }
+</style>
+
+<script>
+  const API = 'http://localhost:8000';
+
+  async function doRegister() {
+    const name = document.getElementById('reg-name').value;
+    const email = document.getElementById('reg-email').value;
+    const password = document.getElementById('reg-password').value;
+    const msg = document.getElementById('auth-message');
+
+    if (!name || !email || !password) {
+      msg.innerHTML = '<span class="error">❌ Preenche todos os campos.</span>';
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password })
+      });
+      const data = await res.json();
+      if (data.status === 'ok') {
+        msg.innerHTML = `<span class="success">✅ ${data.message} <a href="/auth/login">Faz login aqui</a></span>`;
+      } else {
+        msg.innerHTML = `<span class="error">❌ ${data.message}</span>`;
+      }
+    } catch {
+      msg.innerHTML = '<span class="error">❌ Erro de ligação ao servidor.</span>';
+    }
+  }
+</script>
